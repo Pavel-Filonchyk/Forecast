@@ -1,44 +1,45 @@
 import React, { useState } from 'react'
 import {useSelector, useDispatch} from 'react-redux'
 import {Link} from 'react-router-dom'
-
+import {AppType} from '../../store'
 import findItems from '../findeItems'
-import {setShowMain} from '../../actions'
+import {actions} from '../../actions'
 
 export default function ForecastMinsk() {
-  const load = useSelector(state => state.load)
+  const load = useSelector((state: AppType) => state.load)
   const dispatch = useDispatch()
 
   const showMain = () => {
-    dispatch(setShowMain())
+    dispatch(actions.setShowMain())
   }
   let values = findItems(load[3]).flat().flat().flat().flat() 
   let values1 = findItems(load[0]).flat().flat()
   
-  let name = values1.find(item => item === "Minsk")
+  let name: string = values1.find((item: any) => item === "Minsk")
 
-  const temp1 = Math.round(values[246] - 273)
-  const temp2 = Math.round(values[422] - 273)
-  const temp3 = Math.round(values[598] - 273)
-  const temp4 = Math.round(values[774] - 273)
+  const temp1: number = Math.round(values[246] - 273)
+  const temp2: number = Math.round(values[422] - 273)
+  const temp3: number = Math.round(values[598] - 273)
+  const temp4: number = Math.round(values[774] - 273)
 
   const pic1 = `https://openweathermap.org/img/wn/${values[236]}@2x.png`
   const pic2 = `https://openweathermap.org/img/wn/${values[412]}@2x.png`
   const pic3 = `https://openweathermap.org/img/wn/${values[588]}@2x.png`
   const pic4 = `https://openweathermap.org/img/wn/${values[764]}@2x.png`
   
-  const [isInput, setInput] = useState([])
-  const handleSubmit = (e) => {
+  const [isInput, setInput] = useState(["Hi"])
+  const handleSubmit = (e: any) => {
     e.preventDefault()
   }
-  const onInput = (e) => {
+  const onInput = (e: any) => {
     setInput([e.target.value])
   }
-  const sity1 = isInput.filter(item => item.toLowerCase() === "moscow")
+  const sity1: string = isInput.filter((item: any) => item.toLowerCase() === "moscow")
     .map(elem => {return "Moscow"}).join()
-  const sity2 = isInput.filter(item => item.toLowerCase() === "bratislava")
+  const sity2: string = isInput.filter((item: any) => item.toLowerCase() === "bratislava")
     .map(elem => {return "Bratislava"}).join()
-  let city = ''
+  
+  let city: string = ''
   if (sity1){
     city = `/${sity1}/`
   }

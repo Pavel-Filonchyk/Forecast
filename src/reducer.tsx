@@ -1,9 +1,10 @@
+import {ActionTypes} from "./actions"
 const initialState = {
     load: [],
     show: true
 }
-
-const reducer = (state = initialState, action) => {
+export type InitialStateType = typeof initialState 
+const reducer = (state = initialState, action: ActionTypes): InitialStateType => {
     switch (action.type){ 
         case 'LOADER':
         return {

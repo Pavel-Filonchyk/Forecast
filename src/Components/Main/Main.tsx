@@ -3,29 +3,29 @@ import {useSelector, useDispatch} from 'react-redux'
 import {Link} from 'react-router-dom'
 import './Main.scss' 
 import findItems from '../findeItems'
-import {closeMain} from '../../actions'
-
+import {actions} from '../../actions'
+import {AppType} from '../../store'
 export default function Main() {
 
   const dispatch = useDispatch()
-  const load = useSelector(state => state.load)
+  const load = useSelector((state: AppType) => state.load)
   console.log(load)
 
   const hideMain = () => {
-    dispatch(closeMain())
+    dispatch(actions.closeMain())
   }
   
   let values1 = findItems(load[0]).flat().flat()
   let values2 = findItems(load[1]).flat().flat()
   let values3 = findItems(load[2]).flat().flat()
   
-  let name1 = values1.find(item => item === "Minsk")
-  let name2 = values2.find(item => item === "Moscow")
-  let name3 = values3.find(item => item === "Bratislava")
+  let name1: string = values1.find((item: any) => item === "Minsk")
+  let name2: string = values2.find((item: any) => item === "Moscow")
+  let name3: string = values3.find((item: any) => item === "Bratislava")
 
-  const temp1 = Math.round(values1[7] - 273)
-  const temp2 = Math.round(values2[7] - 273)
-  const temp3 = Math.round(values3[7] - 273)
+  const temp1: number = Math.round(values1[7] - 273)
+  const temp2: number = Math.round(values2[7] - 273)
+  const temp3: number = Math.round(values3[7] - 273)
   
   const pic1 = `https://openweathermap.org/img/wn/${values1[5]}@2x.png`
   const pic2 = `https://openweathermap.org/img/wn/${values2[5]}@2x.png`

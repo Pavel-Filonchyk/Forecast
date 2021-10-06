@@ -6,13 +6,14 @@ import ForecastMinsk from "../Forecasts/ForecastMinsk"
 import ForecastMoscow from '../Forecasts/ForecastMoscow'
 import ForecastBratislava from '../Forecasts/ForecastBratislava'
 import {getData} from '../../actions'
+import {AppType} from '../../store'
 
 export default function App() {
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(getData())
       }, [])
-    const show = useSelector(state => state.show)
+    const show = useSelector((state: AppType)=> state.show)
     return (
         <>
             <section className="main">{show ? <Main/> : null}</section>

@@ -1,4 +1,4 @@
-export default function findItems(loader){
+export default function findItems(loader: any): any{
     const result1 = []
     const result2 = []
     for (let key in loader){
@@ -11,7 +11,7 @@ export default function findItems(loader){
     }
     for (let i in result1){
       let value2 = result1[i]
-      if ((Array.isArray(value2)) && Array.isArray(value2).length > 0){
+      if (Array.isArray(value2)){
         result2.push(findItems(value2))
       }else{
         result2.push(value2)
