@@ -18,9 +18,9 @@ export default function App() {
             <section className="main">{show ? <Main/> : null}</section>
             <Switch>
                 <Route exact path="/Main" component={Main}/>
-                <Route exact path="/ForecastMinsk" component={ForecastMinsk}/>
-                <Route exact path="/ForecastMoscow" component={ForecastMoscow}/>
-                <Route exact path="/ForecastBratislava" component={ForecastBratislava}/>
+                <Route exact path="/Minsk" component={ForecastMinsk}/>
+                <Route exact path="/Moscow" component={ForecastMoscow}/>
+                <Route exact path="/Bratislava" component={ForecastBratislava}/>
             </Switch>
         </>
     )

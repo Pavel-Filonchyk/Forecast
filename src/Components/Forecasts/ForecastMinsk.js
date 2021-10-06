@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {useSelector, useDispatch} from 'react-redux'
 import {Link} from 'react-router-dom'
 
@@ -27,8 +27,38 @@ export default function ForecastMinsk() {
   const pic3 = `https://openweathermap.org/img/wn/${values[588]}@2x.png`
   const pic4 = `https://openweathermap.org/img/wn/${values[764]}@2x.png`
   
+  const [isInput, setInput] = useState([])
+  const handleSubmit = (e) => {
+    e.preventDefault()
+  }
+  const onInput = (e) => {
+    setInput([e.target.value])
+  }
+  const sity1 = isInput.filter(item => item.toLowerCase() === "moscow")
+    .map(elem => {return "Moscow"}).join()
+  const sity2 = isInput.filter(item => item.toLowerCase() === "bratislava")
+    .map(elem => {return "Bratislava"}).join()
+  let city = ''
+  if (sity1){
+    city = `/${sity1}/`
+  }
+  if (sity2){
+    city = `/${sity2}/`
+  }else{
+    city = '/Minsk/'
+  }
   return (
     <>
+      <div className="wrap_form" style={{display: "flex", justifyContent: "center", marginTop: 25}}>
+        <form onSubmit={handleSubmit}>
+          <input  style={{color: "gray"}}type="text" required placeholder="Moscow Bratislava"
+            onChange={onInput}
+          />
+          <Link to={city}>
+            <button type="reset">&times;</button>
+          </Link>
+        </form>
+      </div>
       <div className="weather-wrapper">
         <div className="weather-card">
           <div className="wrap_icon">

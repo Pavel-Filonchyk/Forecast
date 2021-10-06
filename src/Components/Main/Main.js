@@ -40,7 +40,7 @@ export default function Main() {
         </div>
         <h4>weather now</h4>
         <p>{name1}</p>
-        <Link to="/ForecastMinsk/">
+        <Link to="/Minsk/">
           <button style={{width: 68, height: 20, marginTop: 10, marginLeft:20, color: 'gray'}}
             onClick={hideMain}
           >forecast</button>
@@ -54,7 +54,7 @@ export default function Main() {
       </div>   
       <h4>weather now</h4>
       <p>{name2}</p>
-      <Link to="/ForecastMoscow/">
+      <Link to="/Moscow/">
         <button style={{width: 68, height: 20, marginTop: 10, marginLeft:20, color: 'gray'}}
           onClick={hideMain}
         >forecast</button>
@@ -68,7 +68,7 @@ export default function Main() {
     </div>   
       <h4>weather now</h4>
       <p>{name3}</p>
-      <Link to="/ForecastBratislava/">
+      <Link to="/Bratislava/">
         <button style={{width: 68, height: 20, marginTop: 10, marginLeft:20, color: 'gray'}}
           onClick={hideMain}
         >forecast</button>

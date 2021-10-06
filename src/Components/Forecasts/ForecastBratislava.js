@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {useSelector, useDispatch} from 'react-redux'
 import {Link} from 'react-router-dom'
 
@@ -26,54 +26,85 @@ export default function ForecastBratislava() {
   const pic2 = `https://openweathermap.org/img/wn/${values[420]}@2x.png`
   const pic3 = `https://openweathermap.org/img/wn/${values[596]}@2x.png`
   const pic4 = `https://openweathermap.org/img/wn/${values[794]}@2x.png`
-    return (
-        <>
-        <div className="weather-wrapper">
-          <div className="weather-card">
-            <div className="wrap_icon">
-              <h1>{temp1}º</h1>
-              <img style={{height: 65, width: 65, marginTop: 6}} src={pic1} alt=""/>
-            </div>
-              <h4>weather</h4>
-              <p>{name}</p>
-              <h4>Data: {values[208]}</h4>
-          </div>
-            <div className="weather-card">
-              <div className="wrap_icon">
-                <h1>{temp2}º</h1>
-                <img style={{height: 65, width: 65, marginTop: 6}} src={pic2} alt=""/>
-              </div>   
-              <h4>weather</h4>
-              <p>{name}</p>
-              <h4>Data: {values[406]}</h4>
-            </div>
-            <div className="weather-card">
-              <div className="wrap_icon">
-                <h1>{temp3}º</h1>
-                <img style={{height: 65, width: 65, marginTop: 6}} src={pic3} alt=""/>
-              </div>   
-              <h4>weather</h4>
-              <p>{name}</p>
-              <h4>Data: {values[582]}</h4>
-            </div>
-            <div className="weather-card">
-            <div className="wrap_icon">
-              <h1>{temp4}º</h1>
-              <img style={{height: 65, width: 65, marginTop: 6}} src={pic4} alt=""/>
-            </div>
-              <h4>weather</h4>
-              <p>{name}</p>
-              <h4>Data: {values[758]}</h4>
-          </div>
+    
+  const [isInput, setInput] = useState([])
+  const handleSubmit = (e) => {
+    e.preventDefault()
+  }
+  const onInput = (e) => {
+    setInput([e.target.value])
+  }
+  const sity1 = isInput.filter(item => item.toLowerCase() === "minsk")
+    .map(elem => {return "Minsk"}).join()
+  const sity2 = isInput.filter(item => item.toLowerCase() === "moscow")
+    .map(elem => {return "Moscow"}).join()
+  let city = null
+  if (sity1){
+    city = `/${sity1}/`
+  }
+  if (sity2){
+    city = `/${sity2}/`
+  }else{
+    city = '/Bratislava/'
+  }
+  return (
+    <>
+    <div className="wrap_form" style={{display: "flex", justifyContent: "center", marginTop: 25}}>
+      <form onSubmit={handleSubmit}>
+        <input  style={{color: "gray"}}type="text" placeholder="Minsk Moscom"
+          onChange={onInput}
+        />
+        <Link to={city}>
+          <button type="reset">&times;</button>
+        </Link>
+      </form>
+    </div>
+    <div className="weather-wrapper">
+      <div className="weather-card">
+        <div className="wrap_icon">
+          <h1>{temp1}º</h1>
+          <img style={{height: 65, width: 65, marginTop: 6}} src={pic1} alt=""/>
         </div>
-        <div className="wrap_button"  style={{display: "flex", justifyContent: "center"}}>
-          <Link to="/">
-            <button style={{height: 20, width: "auto", color: "gray"}}
-              onClick={showMain}
-            >back to main</button>
-          </Link>
+          <h4>weather</h4>
+          <p>{name}</p>
+          <h4>Data: {values[208]}</h4>
+      </div>
+        <div className="weather-card">
+          <div className="wrap_icon">
+            <h1>{temp2}º</h1>
+            <img style={{height: 65, width: 65, marginTop: 6}} src={pic2} alt=""/>
+          </div>   
+          <h4>weather</h4>
+          <p>{name}</p>
+          <h4>Data: {values[406]}</h4>
         </div>
-        
-      </>
+        <div className="weather-card">
+          <div className="wrap_icon">
+            <h1>{temp3}º</h1>
+            <img style={{height: 65, width: 65, marginTop: 6}} src={pic3} alt=""/>
+          </div>   
+          <h4>weather</h4>
+          <p>{name}</p>
+          <h4>Data: {values[582]}</h4>
+        </div>
+        <div className="weather-card">
+        <div className="wrap_icon">
+          <h1>{temp4}º</h1>
+          <img style={{height: 65, width: 65, marginTop: 6}} src={pic4} alt=""/>
+        </div>
+          <h4>weather</h4>
+          <p>{name}</p>
+          <h4>Data: {values[758]}</h4>
+      </div>
+    </div>
+    <div className="wrap_button"  style={{display: "flex", justifyContent: "center"}}>
+      <Link to="/">
+        <button style={{height: 20, width: "auto", color: "gray"}}
+          onClick={showMain}
+        >back to main</button>
+      </Link>
+    </div>
+    
+  </>
     )
 }
