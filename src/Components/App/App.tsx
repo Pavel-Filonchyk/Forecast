@@ -4,7 +4,8 @@ import {useSelector, useDispatch} from 'react-redux'
 import Main from "../Main/Main"
 import ForecastMinsk from "../Forecasts/ForecastMinsk"
 import ForecastMoscow from '../Forecasts/ForecastMoscow'
-import ForecastBratislava from '../Forecasts/ForecastBratislava'
+import ForecastIbiza from '../Forecasts/ForecastIbiza'
+import ForecastLondon from '../Forecasts/ForecastLondon'
 import {getData} from '../../actions'
 import {AppType} from '../../store'
 
@@ -21,7 +22,8 @@ export default function App() {
                 <Route exact path="/Main" component={Main}/>
                 <Route exact path="/Minsk" component={ForecastMinsk}/>
                 <Route exact path="/Moscow" component={ForecastMoscow}/>
-                <Route exact path="/Bratislava" component={ForecastBratislava}/>
+                <Route exact path="/London" component={ForecastLondon}/>
+                <Route exact path="/Ibiza" component={ForecastIbiza}/>
             </Switch>
         </>
     )

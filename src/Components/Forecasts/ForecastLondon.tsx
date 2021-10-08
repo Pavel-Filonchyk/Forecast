@@ -5,27 +5,27 @@ import {AppType} from '../../store'
 import findItems from '../findeItems'
 import {actions} from '../../actions'
 
-export default function ForecastBratislava() {
+export default function ForecastParis() {
     const load = useSelector((state: AppType) => state.load)
   const dispatch = useDispatch()
 
   const showMain = () => {
     dispatch(actions.setShowMain())
   }
-  let values = findItems(load[5]).flat().flat().flat().flat() 
+  let values = findItems(load[6]).flat().flat().flat().flat() 
   let values1 = findItems(load[2]).flat().flat()
   
-  let name: string = values1.find((item: any) => item === "Bratislava")
+  let name: string = values1.find((item: any) => item === "London")
 
-  const temp1: number = Math.round(values[254] - 273)
-  const temp2: number = Math.round(values[430] - 273)
-  const temp3: number = Math.round(values[606] - 273)
-  const temp4: number = Math.round(values[760] - 273)
+  const temp1: number = Math.round(values[246] - 273)
+  const temp2: number = Math.round(values[422] - 273)
+  const temp3: number = Math.round(values[598] - 273)
+  const temp4: number = Math.round(values[774] - 273)
 
-  const pic1 = `https://openweathermap.org/img/wn/${values[222]}@2x.png`
-  const pic2 = `https://openweathermap.org/img/wn/${values[420]}@2x.png`
-  const pic3 = `https://openweathermap.org/img/wn/${values[596]}@2x.png`
-  const pic4 = `https://openweathermap.org/img/wn/${values[794]}@2x.png`
+  const pic1 = `https://openweathermap.org/img/wn/${values[236]}@2x.png`
+  const pic2 = `https://openweathermap.org/img/wn/${values[412]}@2x.png`
+  const pic3 = `https://openweathermap.org/img/wn/${values[588]}@2x.png`
+  const pic4 = `https://openweathermap.org/img/wn/${values[764]}@2x.png`
     
   const [isInput, setInput] = useState(["Hi"])
   const handleSubmit = (e: any) => {
@@ -34,29 +34,34 @@ export default function ForecastBratislava() {
   const onInput = (e: any) => {
     setInput([e.target.value])
   }
-  const sity1 = isInput.filter((item: any) => item.toLowerCase() === "minsk")
+  const city1: string = isInput.filter((item: any) => item.toLowerCase() === "minsk")
     .map(elem => {return "Minsk"}).join()
-  const sity2 = isInput.filter((item: any) => item.toLowerCase() === "moscow")
+  const city2: string = isInput.filter((item: any) => item.toLowerCase() === "moscow")
     .map(elem => {return "Moscow"}).join()
-  let city: any = ""
-  if (sity1){
-    city = `/${sity1}/`
+  const city3: string = isInput.filter((item: any) => item.toLowerCase() === "ibiza")
+    .map(elem => {return "Ibiza"}).join()
+  let city = null
+  if (city1){
+    city = `/${city1}/`
   }
-  if (sity2){
-    city = `/${sity2}/`
-  }else{
-    city = '/Bratislava/'
+  if (city2){
+    city = `/${city2}/`
   }
+  if (city3){
+    city = `/${city3}/`
+ }
   return (
     <>
     <div className="wrap_form" style={{display: "flex", justifyContent: "center", marginTop: 25}}>
       <form onSubmit={handleSubmit}>
-        <input  style={{color: "gray"}}type="text" placeholder="Minsk Moscom"
+        <input  style={{color: "gray"}}type="text" placeholder="Minsk Moscow Ibiza"
           onChange={onInput}
         />
-        <Link to={city}>
-          <button type="reset">&times;</button>
-        </Link>
+        {city ? <Link to={city}>
+          <button type="reset"
+          >&times;</button>
+          </Link>
+        : null}
       </form>
     </div>
     <div className="weather-wrapper">
@@ -67,7 +72,7 @@ export default function ForecastBratislava() {
         </div>
           <h4>weather</h4>
           <p>{name}</p>
-          <h4>Data: {values[208]}</h4>
+          <h4>Data: {values[222]}</h4>
       </div>
         <div className="weather-card">
           <div className="wrap_icon">
@@ -76,7 +81,7 @@ export default function ForecastBratislava() {
           </div>   
           <h4>weather</h4>
           <p>{name}</p>
-          <h4>Data: {values[406]}</h4>
+          <h4>Data: {values[398]}</h4>
         </div>
         <div className="weather-card">
           <div className="wrap_icon">
@@ -85,7 +90,7 @@ export default function ForecastBratislava() {
           </div>   
           <h4>weather</h4>
           <p>{name}</p>
-          <h4>Data: {values[582]}</h4>
+          <h4>Data: {values[574]}</h4>
         </div>
         <div className="weather-card">
         <div className="wrap_icon">
@@ -94,7 +99,7 @@ export default function ForecastBratislava() {
         </div>
           <h4>weather</h4>
           <p>{name}</p>
-          <h4>Data: {values[758]}</h4>
+          <h4>Data: {values[750]}</h4>
       </div>
     </div>
     <div className="wrap_button"  style={{display: "flex", justifyContent: "center"}}>

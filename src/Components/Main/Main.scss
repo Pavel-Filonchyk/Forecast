@@ -77,6 +77,12 @@ body {
     display: flex;
     flex-direction: row;
 }
+input:invalid {
+    border: 1px dashed red
+}
+input:valid {
+    border: 1px dashed black
+}
 /*
 .sun { 
     background: $color4; 

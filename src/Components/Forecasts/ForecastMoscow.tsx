@@ -12,7 +12,7 @@ export default function ForecastMoscow() {
   const showMain = () => {
     dispatch(actions.setShowMain())
   }
-  let values = findItems(load[4]).flat().flat().flat().flat() 
+  let values = findItems(load[5]).flat().flat().flat().flat() 
   let values1 = findItems(load[1]).flat().flat()
   
   let name: string = values1.find((item: any) => item === "Moscow")
@@ -34,30 +34,34 @@ export default function ForecastMoscow() {
   const onInput = (e: any) => {
     setInput([e.target.value])
   }
-  const sity1: string = isInput.filter((item: any) => item.toLowerCase() === "minsk")
+  const city1: string = isInput.filter((item: any) => item.toLowerCase() === "minsk")
     .map(elem => {return "Minsk"}).join()
-  const sity2: string = isInput.filter((item: any) => item.toLowerCase() === "bratislava")
-    .map(elem => {return "Bratislava"}).join()
-  let city: string = ""
-  if (sity1){
-    city = `/${sity1}/`
+  const city2: string = isInput.filter((item: any) => item.toLowerCase() === "london")
+    .map(elem => {return "London"}).join()
+  const city3: string = isInput.filter((item: any) => item.toLowerCase() === "Minsk")
+    .map(elem => {return "Ibiza"}).join()
+  let city = null
+  if (city1){
+    city = `/${city1}/`
   }
-  if (sity2){
-    city = `/${sity2}/`
-  }else{
-    city = '/Moscow/'
+  if (city2){
+    city = `/${city2}/`
   }
-
+  if (city3){
+    city = `/${city3}/`
+  }
   return (
   <>
   <div className="wrap_form" style={{display: "flex", justifyContent: "center", marginTop: 25}}>
     <form onSubmit={handleSubmit}>
-      <input  style={{color: "gray"}}type="text" placeholder="Minsk Bratislava"
+      <input  style={{color: "gray"}}type="text" placeholder="Minsk London Ibiza"
         onChange={onInput}
       />
-      <Link to={city}>
-        <button type="reset">&times;</button>
-      </Link>
+      {city ? <Link to={city}>
+        <button type="reset"
+        >&times;</button>
+        </Link>
+      : null}
     </form>
   </div>
   <div className="weather-wrapper">

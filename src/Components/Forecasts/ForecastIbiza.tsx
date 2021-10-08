@@ -5,17 +5,17 @@ import {AppType} from '../../store'
 import findItems from '../findeItems'
 import {actions} from '../../actions'
 
-export default function ForecastMinsk() {
+export default function Ibiza() {
   const load = useSelector((state: AppType) => state.load)
   const dispatch = useDispatch()
 
   const showMain = () => {
     dispatch(actions.setShowMain())
   }
-  let values = findItems(load[4]).flat().flat().flat().flat() 
-  let values1 = findItems(load[0]).flat().flat()
-  console.log(findItems(load[3]))
-  let name: string = values1.find((item: any) => item === "Minsk")
+  let values = findItems(load[7]).flat().flat().flat().flat() 
+  let values1 = findItems(load[3]).flat().flat()
+  console.log(values)
+  let name: string = values1.find((item: any) => item === "Madrid")
 
   const temp1: number = Math.round(values[246] - 273)
   const temp2: number = Math.round(values[422] - 273)
@@ -37,10 +37,10 @@ export default function ForecastMinsk() {
   
   const city1: string = isInput.filter((item: any) => item.toLowerCase() === "moscow")
     .map(elem => {return "Moscow"}).join()
-  const city2: string = isInput.filter((item: any) => item.toLowerCase() === "london")
+  const city2: string = isInput.filter((item: any) => item.toLowerCase() === "Berlin")
     .map(elem => {return "London"}).join()
-  const city3: string = isInput.filter((item: any) => item.toLowerCase() === "Ibiza")
-    .map(elem => {return "Ibiza"}).join()
+  const city3: string = isInput.filter((item: any) => item.toLowerCase() === "Minsk")
+    .map(elem => {return "Minsk"}).join()
     let city = null
     if (city1){
       city = `/${city1}/`
@@ -49,13 +49,13 @@ export default function ForecastMinsk() {
       city = `/${city2}/`
     }
     if (city3){
-      city = `/${city3}/`
-   }
+       city = `/${city3}/`
+    }
   return (
     <>
       <div className="wrap_form" style={{display: "flex", justifyContent: "center", marginTop: 25}}>
         <form onSubmit={handleSubmit}>
-          <input  style={{color: "gray"}} type="text" placeholder="Moscow London Ibiza"
+          <input  style={{color: "gray"}} type="text" placeholder="Minsk Moscow London"
             onChange={onInput}
           />
           {city ? <Link to={city}>
