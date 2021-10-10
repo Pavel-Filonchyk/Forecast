@@ -1,99 +1,98 @@
-import React from 'react'
+import React, {useEffect, useMemo} from 'react'
 import {useSelector, useDispatch} from 'react-redux'
 import {Link} from 'react-router-dom'
 import './Main.scss' 
-import findItems from '../findeItems'
-import {actions} from '../../actions'
+import findTemperature from '../../functions/forecastToday'
+import {actions, getData} from '../../actions'
 import {AppType} from '../../store'
+
 export default function Main() {
-
-  const dispatch = useDispatch()
   const load = useSelector((state: AppType) => state.load)
-  console.log(load)
+  const cities = useSelector((state: AppType) => state.cities)
+  const dispatch = useDispatch()
+  
+  console.log(load[4])
 
-  const hideMain = () => {
+  useEffect(() => {
+      dispatch(getData(cities))
+    }, [])
+  
+  const hideMain = (serverAPILine: number, chosedCity: string) => {
     dispatch(actions.closeMain())
+    dispatch(actions.pushItems([serverAPILine, chosedCity]))
   }
-  
-  let values1 = findItems(load[0]).flat().flat()
-  let values2 = findItems(load[1]).flat().flat()
-  let values3 = findItems(load[2]).flat().flat()
-  let values4 = findItems(load[3]).flat().flat()
-  console.log(values3)
-  let name1: string = values1.find((item: any) => item === "Minsk")
-  let name2: string = values2.find((item: any) => item === "Moscow")
-  let name3: string = values3.find((item: any) => item === "London")
-  let name4: string = values4.find((item: any) => item === "Madrid")
- 
-  const temp1: number = Math.round(values1[7] - 273)
-  const temp2: number = Math.round(values2[7] - 273)
-  const temp3: number = Math.round(values3[7] - 273)
-  const temp4: number = Math.round(values4[7] - 273)
-  
-  const pic1 = `https://openweathermap.org/img/wn/${values1[5]}@2x.png`
-  const pic2 = `https://openweathermap.org/img/wn/${values2[5]}@2x.png`
-  const pic3 = `https://openweathermap.org/img/wn/${values3[5]}@2x.png`
-  const pic4 = `https://openweathermap.org/img/wn/${values4[5]}@2x.png`
 
+  const nums = [0, 1, 2, 3]
+
+  const temperatures = useMemo(() => 
+    nums.map(item =>{
+      return findTemperature(load[item])[0] 
+    }), 
+  [load])
+
+  const pics = useMemo(() =>
+    nums.map(item => {
+      return `https://openweathermap.org/img/wn/${findTemperature(load[item])[1]}@2x.png`
+    }),
+  [load])
+  
   return (
   <div className="weather-wrapper">
     <div className="weather-card">
-      <div className="weather-icon sun"></div>
-        <div className="wrap_icon">
-          <h1>{temp1}º</h1>
-          <img style={{height: 65, width: 65, marginTop: 6}} src={pic1} alt=""/>
-        </div>
-        <h4>weather now</h4>
-        <p>{name1}</p>
-        <Link to="/Minsk/">
-          <button style={{width: 68, height: 20, marginTop: 10, marginLeft:20, color: 'gray'}}
-            onClick={hideMain}
-          >forecast</button>
-        </Link>
+      <div className="wrap_icon">
+        <h1>{temperatures[0]}º</h1>
+        <img style={{height: 65, width: 65, marginTop: 6}} src={pics[0]} alt=""/>
       </div>
+      <h4>weather now</h4>
+      <p>{cities[0][0]}</p>
+      <Link to="/Cities/">
+      <button style={{width: 80, height: 20, marginTop: 10, marginLeft:20, color: 'gray'}}
+        onClick={()=>hideMain(4, cities[0][0])}
+      >forecast</button>
+      </Link>
+    </div>
     <div className="weather-card">
       <div className="weather-icon cloud"></div>
       <div className="wrap_icon">
-        <h1>{temp2}º</h1>
-        <img style={{height: 65, width: 65, marginTop: 6}} src={pic2} alt=""/>
+        <h1>{temperatures[1]}º</h1>
+        <img style={{height: 65, width: 65, marginTop: 6}} src={pics[1]} alt=""/>
       </div>   
       <h4>weather now</h4>
-      <p>{name2}</p>
-      <Link to="/Moscow/">
-        <button style={{width: 68, height: 20, marginTop: 10, marginLeft:20, color: 'gray'}}
-          onClick={hideMain}
+      <p>{cities[1][0]}</p>
+      <Link to="/Cities/">
+        <button style={{width: 80, height: 20, marginTop: 10, marginLeft:20, color: 'gray'}}
+          onClick={()=>hideMain(5, cities[1][0])}
         >forecast</button>
       </Link>
     </div>
     <div className="weather-card">
       <div className="weather-icon cloud"></div>
       <div className="wrap_icon">
-      <h1>{temp3}º</h1>
-      <img style={{height: 65, width: 65, marginTop: 6}} src={pic3} alt=""/>
+      <h1>{temperatures[2]}º</h1>
+      <img style={{height: 65, width: 65, marginTop: 6}} src={pics[2]} alt=""/>
     </div>   
       <h4>weather now</h4>
-      <p>{name3}</p>
-      <Link to="/London/">
-        <button style={{width: 68, height: 20, marginTop: 10, marginLeft:20, color: 'gray'}}
-          onClick={hideMain}
+      <p>{cities[2][0]}</p>
+      <Link to="/Cities/">
+        <button style={{width: 80, height: 20, marginTop: 10, marginLeft:20, color: 'gray'}}
+          onClick={()=>hideMain(6, cities[2][0])}
         >forecast</button>
       </Link>
     </div>
     <div className="weather-card">
       <div className="weather-icon cloud"></div>
       <div className="wrap_icon">
-      <h1>{temp4}º</h1>
-      <img style={{height: 65, width: 65, marginTop: 6}} src={pic4} alt=""/>
+      <h1>{temperatures[3]}º</h1>
+      <img style={{height: 65, width: 65, marginTop: 6}} src={pics[3]} alt=""/>
     </div>   
       <h4>weather now</h4>
-      <p>{name4}</p>
-      <Link to="/Ibiza/">
-        <button style={{width: 68, height: 20, marginTop: 10, marginLeft:20, color: 'gray'}}
-          onClick={hideMain}
+      <p>{cities[3][0]}</p>
+      <Link to="/Cities/">
+        <button style={{width: 80, height: 20, marginTop: 10, marginLeft:20, color: 'gray'}}
+          onClick={()=>hideMain(7, cities[3][0])}
         >forecast</button>
       </Link>
     </div>
-
   </div>
   )
 }

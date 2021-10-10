@@ -1,7 +1,9 @@
 import {ActionTypes} from "./actions"
 const initialState = {
+    cities: [["Minsk", "BY"], ["Moscow", "RU"], ["London", "UK"], ["Madrid", "ES"]],
     load: [],
-    show: true
+    show: true,
+    items: []
 }
 export type InitialStateType = typeof initialState 
 const reducer = (state = initialState, action: ActionTypes): InitialStateType => {
@@ -20,6 +22,11 @@ const reducer = (state = initialState, action: ActionTypes): InitialStateType =>
         return {
             ...state,
             show: true 
+        }
+        case 'PUSH_ITEMS':
+        return {
+            ...state,
+            items: action.payload 
         }
         default: 
         return state;  
